@@ -35,7 +35,7 @@
     if(!self.txtInput.text.length)
     {
         NSLog(@"Empty input");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please type a number!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please enter a number!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:ok];
         [self presentViewController:alertController animated:YES completion:nil];

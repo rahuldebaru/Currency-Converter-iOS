@@ -13,7 +13,10 @@
 #define APP_API_KEY     @"f19a35718b874219a252b8c390b15a35"
 
 @interface SecondViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+{
 
+
+}
 @property (strong, nonatomic) NSDictionary* exRate;
 @property (strong, nonatomic) NSString* base;
 @property (strong, nonatomic) NSString* from;
@@ -38,7 +41,12 @@
 {
     [super viewDidAppear:animated];
     [self enableUserInput:NO];
-    [MBProgressHUD showHUDAddedTo:self.view withText:@"Fetching exchange rate..." mode:MBProgressHUDModeIndeterminate animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.animationType = MBProgressHUDAnimationZoom;
+    hud.label.text = @"Fetching Exchange Rate...";
+    hud.minShowTime = 1;
+    
     // TODO: Implement cache storage through Core Data or even plist to store the exchange rate for a day and refresh on a new day
     [self getExchangeRates];
 }
@@ -57,8 +65,8 @@
                                 NSURLResponse *response,
                                 NSError *error) {
                 
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                 });
                 
                 NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
